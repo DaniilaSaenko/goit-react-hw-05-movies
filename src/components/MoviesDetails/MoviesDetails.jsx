@@ -4,12 +4,11 @@ import { getMovie } from '../../service/api';
 import Box from '../Box';
 import { Text, H1, Title, Button, Nav, Item, Ul } from './MoviesDetails.styled';
 import { VscArrowLeft } from 'react-icons/vsc';
+import noPhoto from '../../pages/NotFound/no-poster.png';
 
-export function MoviesDetails({ movieId }) {
+export const MoviesDetails = ({ movieId }) => {
   const location = useLocation();
   const [movies, setMovies] = useState(null);
-
-  console.log(location);
   useEffect(() => {
     getMovie(movieId).then(data => setMovies(data));
   }, [movieId]);
@@ -27,12 +26,15 @@ export function MoviesDetails({ movieId }) {
             <Button to={location?.state?.from ?? '/'}>
               <VscArrowLeft /> &nbsp;Back
             </Button>
-
-            <img
-              src={`https://image.tmdb.org/t/p/original${movies?.poster_path}`}
-              alt={movies?.title}
-              width={250}
-            />
+                {movies?.poster_path !== null ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/original${movies?.poster_path}`}
+                    alt={movies?.title}
+                    width={250}
+                  />
+                ) : (
+                  <img src={noPhoto} alt=""width={250} />
+                )}          
           </Box>
           <Box
             display="flex"
