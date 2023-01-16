@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getReviews } from '../../service/api';
@@ -24,10 +25,16 @@ const Reviews = () => {
           ))}
         </List>
       ) : (
-        <Text>Sorry, we haven't added a description yet.</Text>
+        <Text>We don`t have any reviews for this movie</Text>
       )}
     </Box>
   );
 };
 
 export default Reviews;
+
+Reviews.propTypes = {
+    id: PropTypes.string,
+    author: PropTypes.string,
+    content: PropTypes.string
+};

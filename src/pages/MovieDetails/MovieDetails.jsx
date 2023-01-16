@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { MoviesDetails } from '../../components/MoviesDetails/MoviesDetails';
 
@@ -11,3 +12,16 @@ const MovieDetails = () => {
   );
 };
 export default MovieDetails;
+
+MovieDetails.propTypes = {
+  movieId: PropTypes.number,
+  movie: PropTypes.objectOf(
+    PropTypes.shape({
+      poster_path: PropTypes.string,
+      title: PropTypes.string,
+      release_date: PropTypes.string,
+      vote_average: PropTypes.number,
+      overview: PropTypes.string,
+    })
+  ),
+};

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCast } from '../../service/api';
@@ -14,28 +15,35 @@ const Cast = () => {
   }, [movieId]);  
 
    return (
-    <Box>
-      <Ul> 
-         {cast.map(({ name, id, character, profile_path }) => (
-           <Item key={id}>
-                {profile_path !== null ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
-                    alt={name}
-                    width={200}
-                  />
-                ) : (
-                  <img src={noPhoto} alt={name} width={200} />
-                )}             
-            <Title>{name}</Title>
-            <Text>Character: {character}</Text>
-          </Item>
-        ))}
-      </Ul>
+     <Box>
+       {cast.length ? (
+         <Ul>
+           {cast.map(({ name, id, character, profile_path }) => (
+             <Item key={id}>
+               {profile_path !== null ? (
+                 <img
+                   src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
+                   alt={name}
+                   width={200}
+                 />
+               ) : (
+                 <img src={noPhoto} alt={name} width={200} />
+               )}
+               <Title>{name}</Title>
+               <Text>Character: {character}</Text>
+             </Item>
+           ))}
+         </Ul>
+        ) : (
+        <Text>We don`t have any casts for this movie</Text>
+      )}
     </Box>
   );
-
-  
 };
 
 export default Cast;
+
+Cast.propTypes = {
+  movieId: PropTypes.number,
+  cast: PropTypes.object,
+};

@@ -11,10 +11,12 @@ const Search = ({ onSubmitMovies }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const form = e.currentTarget;
     if (!query.trim()) {
       return;
     }
     onSubmitMovies(query);
+    form.reset();
   };
 
   return (
